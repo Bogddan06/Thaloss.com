@@ -26,7 +26,7 @@
 }
 
 *{ box-sizing: border-box; }
-html{ scroll-behavior: smooth; }
+html{ scroll-behavior: smooth; overflow-x: hidden; }
 body{
   margin:0;
   background: var(--sand);
@@ -36,11 +36,16 @@ body{
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   animation: page-fade-in .5s ease both;
+  overflow-x: hidden;
 }
 @keyframes page-fade-in{
   from{ opacity: 0; }
   to{ opacity: 1; }
 }
+.page-transition{position:fixed;inset:0;z-index:1000;pointer-events:none;background:var(--forest);clip-path:circle(0% at 100% 0%);transition:clip-path .48s cubic-bezier(.22,1,.36,1)}
+.page-leaving .page-transition{clip-path:circle(150% at 100% 0%)}
+.page-ready .page-transition{animation:reveal-page .58s cubic-bezier(.22,1,.36,1) both}
+@keyframes reveal-page{from{clip-path:circle(150% at 100% 0%)}to{clip-path:circle(0% at 100% 0%)}}
 img{ max-width:100%; display:block; }
 a{ color:inherit; text-decoration:none; }
 
@@ -153,6 +158,7 @@ p{ margin: 0 0 1em; }
   opacity: 0.72;
   transition: opacity .2s ease;
 }
+.nav-links a:not(.nav-cta){ min-height:44px; display:inline-flex; align-items:center; }
 .nav-links a:hover{ opacity: 1; }
 .nav-links a:not(.nav-cta)::after{
   content:"";
@@ -238,6 +244,31 @@ p{ margin: 0 0 1em; }
   .nav-toggle span{ width:22px; height:2px; background: var(--ink); display:block; }
 }
 
+/* Mobile navigation is a complete page state, not a panel over the content. */
+@media (max-width:760px){
+  html.menu-open{overflow:hidden!important;overscroll-behavior:none}
+  body.menu-open{position:fixed;overflow:hidden!important;width:100%;height:100%;overscroll-behavior:none}
+  .site-header{height:64px;background:var(--sand)}
+  .nav{height:64px;padding:11px 20px}
+  .brand img{height:36px}
+  .nav-toggle{width:44px;height:44px;align-items:center;justify-content:center;position:relative}
+  .nav-toggle span{transition:transform .26s cubic-bezier(.22,1,.36,1),opacity .18s ease}
+  .menu-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .menu-open .nav-toggle span:nth-child(2){opacity:0}
+  .menu-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .nav-links{position:fixed!important;top:64px!important;right:0!important;bottom:0!important;left:0!important;width:100vw!important;height:calc(100dvh - 64px)!important;min-height:calc(100dvh - 64px)!important;padding:clamp(36px,8vh,70px) 28px!important;gap:12px!important;align-items:stretch!important;justify-content:flex-start!important;background:linear-gradient(145deg,var(--sand) 0%,#ece5d3 100%)!important;transform:translate3d(0,-12px,0)!important;opacity:0;visibility:hidden;pointer-events:none;z-index:105;transition:transform .36s cubic-bezier(.22,1,.36,1),opacity .22s ease,visibility .22s ease!important}
+  .nav-links.open{height:calc(100vh - 64px)!important;min-height:calc(100vh - 64px)!important;transform:translate3d(0,0,0)!important;opacity:1;visibility:visible;pointer-events:auto}
+  .nav-links a,.nav-links a:not(.nav-cta){display:flex!important;align-items:center;justify-content:space-between;min-height:58px!important;padding:0 6px!important;color:var(--ink)!important;font:600 clamp(24px,7vw,32px)/1 var(--head);letter-spacing:-.035em;opacity:.52!important;border-bottom:1px solid var(--line)}
+  .nav-links a:not(.nav-cta)::after{display:none}
+  .nav-links a.active{opacity:1!important;color:var(--forest)!important}
+  .nav-links a.active::before{content:"Current";font:500 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--amber);order:2}
+  .nav-links .nav-cta{margin-top:18px!important;padding:0 8px 0 20px!important;min-height:54px!important;border:0!important;border-radius:999px!important;background:var(--forest)!important;color:var(--paper)!important;font:600 15px/1 var(--head)!important;letter-spacing:0!important;opacity:1!important}
+  .nav-links.open a{animation:drawer-link .42s cubic-bezier(.22,1,.36,1) both}
+  .nav-links.open a:nth-child(1){animation-delay:.04s}.nav-links.open a:nth-child(2){animation-delay:.08s}.nav-links.open a:nth-child(3){animation-delay:.12s}.nav-links.open a:nth-child(4){animation-delay:.16s}
+  .menu-open .nav-links{touch-action:pan-y}
+}
+@keyframes drawer-link{from{opacity:0;transform:translateY(12px)}to{transform:translateY(0)}}
+
 /* ---------- waterline divider (signature element) ---------- */
 .waterline{
   display:block;
@@ -295,7 +326,7 @@ p{ margin: 0 0 1em; }
   text-transform: uppercase; color: var(--algae-lt); margin-bottom: 12px; font-weight:600;
 }
 .footer-col a, .footer-col div{
-  display:block; font-size: 14px; color: #C9D3CE; margin-bottom: 8px;
+  display:flex; align-items:center; min-height:44px; font-size: 14px; color: #C9D3CE;
 }
 .footer-col a:hover{ color: var(--paper); }
 .footer-bottom{
