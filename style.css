@@ -177,7 +177,8 @@ p{ margin: 0 0 1em; }
   background: rgba(30,74,61,0.06);
   border: 1px solid rgba(30,74,61,0.16);
   color: var(--forest) !important;
-  padding: 7px 7px 7px 30px;
+  padding: 7px 12px;
+  justify-content: center;
   min-height: 44px;
   border-radius: 999px;
   font-weight: 600;
@@ -201,7 +202,6 @@ p{ margin: 0 0 1em; }
   border-color: transparent;
   box-shadow: 0 10px 24px rgba(30,74,61,0.35);
   transform: translateY(-2px);
-  padding-right: 6px;
 }
 .nav-cta:hover::before{ transform: scaleX(1); }
 .nav-cta .cta-arrow{
@@ -262,7 +262,7 @@ p{ margin: 0 0 1em; }
   .nav-links a:not(.nav-cta)::after{display:none}
   .nav-links a.active{opacity:1!important;color:var(--forest)!important}
   .nav-links a.active::before{content:"Current";font:500 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--amber);order:2}
-  .nav-links .nav-cta{margin-top:18px!important;padding:0 8px 0 20px!important;min-height:54px!important;border:0!important;border-radius:999px!important;background:var(--forest)!important;color:var(--paper)!important;font:600 15px/1 var(--head)!important;letter-spacing:0!important;opacity:1!important}
+  .nav-links .nav-cta{margin-top:18px!important;padding:0 14px!important;justify-content:center!important;min-height:54px!important;border:0!important;border-radius:999px!important;background:var(--forest)!important;color:var(--paper)!important;font:600 15px/1 var(--head)!important;letter-spacing:0!important;opacity:1!important}
   .nav-links.open a{animation:drawer-link .42s cubic-bezier(.22,1,.36,1) both}
   .nav-links.open a:nth-child(1){animation-delay:.04s}.nav-links.open a:nth-child(2){animation-delay:.08s}.nav-links.open a:nth-child(3){animation-delay:.12s}.nav-links.open a:nth-child(4){animation-delay:.16s}
   .menu-open .nav-links{touch-action:pan-y}
