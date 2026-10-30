@@ -173,11 +173,11 @@ p{ margin: 0 0 1em; }
   position: relative;
   display:inline-flex;
   align-items:center;
-  gap: 12px;
+  gap: 10px;
   background: rgba(30,74,61,0.06);
   border: 1px solid rgba(30,74,61,0.16);
   color: var(--forest) !important;
-  padding: 7px 12px;
+  padding: 7px 8px;
   justify-content: center;
   min-height: 44px;
   border-radius: 999px;
