@@ -169,7 +169,7 @@ p{ margin: 0 0 1em; }
 .nav-links a:not(.nav-cta):hover::after{ right: 0; }
 .nav-links a.active{ opacity: 1; }
 .nav-links a.active:not(.nav-cta)::after{ right: 0; }
-.nav-cta{
+.nav-links .nav-cta{
   position: relative;
   display:inline-flex;
   align-items:center;
@@ -196,7 +196,7 @@ p{ margin: 0 0 1em; }
   transition: transform .4s cubic-bezier(.2,.8,.2,1);
 }
 .nav-cta span:first-child{ position: relative; z-index: 1; }
-.nav-cta:hover{
+.nav-links .nav-cta:hover{
   color: var(--paper) !important;
   border-color: transparent;
   box-shadow: 0 10px 24px rgba(30,74,61,0.35);
